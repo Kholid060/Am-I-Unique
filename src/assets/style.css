@@ -35,3 +35,12 @@ p{
 .green {
 	color: #24A64B;
 }
+.mb-0{
+	margin-bottom: 0;
+}
+.mb-1{
+	margin-bottom: 6px;
+}
+.italic{
+	font-style: italic;
+}

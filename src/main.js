@@ -6,8 +6,7 @@ import "./assets/style.css";
 
 import axios from "axios";
 const axiosConfig = {
-  baseURL: "http://localhost:3000",
-  timeout: 20000
+  baseURL: "http://username-checker-api.herokuapp.com"
 };
 Vue.prototype.$http = axios.create(axiosConfig);
 

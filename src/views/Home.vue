@@ -5,7 +5,7 @@
     <div class="loading" v-if="loading.active">
       <Spinner :data="cliSpinners.dots"></Spinner>
       <span>Fetching username availability in </span
-      ><span>{{ loading.name }}</span>
+      ><span class="green">{{ loading.name }}</span>
     </div>
     <TextInput></TextInput>
   </div>
@@ -36,7 +36,18 @@ export default {
           this.checkAllSite(a[2]);
         } else if (a[1] === "--s" && a.length === 4) {
           this.checkSpesificSite({ site: a[2], name: a[3] });
-        } else {
+        } else if(a[1] === '--help' && a.length === 2) {
+          this.history.push({
+            type: 'result',
+            text: '<p><span class="green font-weight-medium"> uname --all [username] </span> Check username availability on all 100+ popular website</p><p><span class="green font-weight-medium"> uname --s (website) [username] </span> Check username availability on spesific website</p><p><span class="green font-weight-medium"> uname sites </span> get all supported website list</p>'
+          })
+        } else if(a[1] === 'sites' && a.length === 2) {
+          let sites = this.sites.map(e => e.name)
+          this.history.push({
+            type: 'result',
+            text: sites.join(', ')
+          })
+        }else {
           this.history.push({
             type: "error",
             text: "invalid command"
@@ -85,14 +96,14 @@ export default {
         this.loading.active = true;
         this.loading.name = data.site;
         this.$http.get(`/${data.site}/${data.name}`).then(response => {
-          let data = response.data;
-          let text = data.available
-            ? `username on ${data.name} is available`
-            : `username on ${data.name} is already taken`;
+          let res = response.data;
+          let text = res.available
+            ? `"${data.name}" on ${res.name} is available`
+            : `"${data.name}" on ${res.name} is already taken`;
           this.history.push({
             type: "result",
             text: `<span class="${
-              data.available ? "green" : "red"
+              res.available ? "green" : "red"
             }">${text}</span>`
           });
           this.loading.active = false;

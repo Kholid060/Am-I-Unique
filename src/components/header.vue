@@ -13,11 +13,15 @@
 		</pre
     >
     <div class="header-content">
-      <p>
+      <p class="mb-1">
         Author:
         <a href="mailto: kholid060@gmail.com" class="font-weight-medium"
           >Kholid060</a
         >
+      </p>
+      <p>
+        Github:
+        <a href="https://github.com/Kholid060/Am-I-Unique">Am-I-Unique</a>
       </p>
       <p>
         <span class="yellow">Am I Unique</span> is a tool that help you to find
