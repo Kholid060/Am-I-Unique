@@ -1,0 +1,37 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+body{
+	background-color: #1D1F21;
+}
+a {
+	color: #82a9ca;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+.font-weight-medium {
+	font-weight: 500;
+}
+.font-weight-bold{
+	font-weight: 700
+}
+p{
+	margin-top: 0;
+	margin-bottom: 12px;
+}
+.red {
+	color: #cc6666;
+}
+.yellow {
+	color: #ceb65b;
+}
+.blue {
+	color: #82a9ca;
+}
+.green {
+	color: #24A64B;
+}
