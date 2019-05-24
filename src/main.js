@@ -6,7 +6,7 @@ import "./assets/style.css";
 
 import axios from "axios";
 const axiosConfig = {
-  baseURL: "https://username-checker-api.herokuapp.com/9gag/kholid060"
+  baseURL: "https://username-checker-api.herokuapp.com"
 };
 Vue.prototype.$http = axios.create(axiosConfig);
 

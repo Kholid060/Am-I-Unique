@@ -4,7 +4,7 @@
     <History :history="history"></History>
     <div class="loading" v-if="loading.active">
       <Spinner :data="cliSpinners.dots"></Spinner>
-      <span>Fetching username availability in </span
+      <span>👨‍💻 Fetching username availability in </span
       ><span class="green">{{ loading.name }}</span>
     </div>
     <TextInput></TextInput>
@@ -36,18 +36,19 @@ export default {
           this.checkAllSite(a[2]);
         } else if (a[1] === "--s" && a.length === 4) {
           this.checkSpesificSite({ site: a[2], name: a[3] });
-        } else if(a[1] === '--help' && a.length === 2) {
+        } else if (a[1] === "--help" && a.length === 2) {
           this.history.push({
-            type: 'result',
-            text: '<p><span class="green font-weight-medium"> uname --all [username] </span> Check username availability on all 100+ popular website</p><p><span class="green font-weight-medium"> uname --s (website) [username] </span> Check username availability on spesific website</p><p><span class="green font-weight-medium"> uname sites </span> get all supported website list</p>'
-          })
-        } else if(a[1] === 'sites' && a.length === 2) {
-          let sites = this.sites.map(e => e.name)
+            type: "result",
+            text:
+              '<p><span class="green font-weight-medium"> uname --all [username] </span> Check username availability on all 100+ popular website</p><p><span class="green font-weight-medium"> uname --s (website) [username] </span> Check username availability on spesific website</p><p><span class="green font-weight-medium"> uname sites </span> get all supported website list</p>'
+          });
+        } else if (a[1] === "sites" && a.length === 2) {
+          let sites = this.sites.map(e => e.name);
           this.history.push({
-            type: 'result',
-            text: sites.join(', ')
-          })
-        }else {
+            type: "result",
+            text: sites.join(", ")
+          });
+        } else {
           this.history.push({
             type: "error",
             text: "invalid command"
@@ -70,8 +71,8 @@ export default {
           let response = await this.$http.get(`/${site.name}/${name}`);
           let data = response.data;
           let text = data.available
-            ? `username on ${site.name} is available`
-            : `username on ${site.name} is already taken`;
+            ? `"${name}" on ${site.name} is available`
+            : `"${name}" on ${site.name} is already taken`;
           this.history.push({
             type: "result",
             text: `<span class="${

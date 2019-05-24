@@ -13,12 +13,7 @@
 		</pre
     >
     <div class="header-content">
-      <p class="mb-1">
-        Author:
-        <a href="mailto: kholid060@gmail.com" class="font-weight-medium"
-          >Kholid060</a
-        >
-      </p>
+      <p class="mb-1">Author: <span class="blue">Kholid060</span></p>
       <p>
         Github:
         <a href="https://github.com/Kholid060/Am-I-Unique">Am-I-Unique</a>
