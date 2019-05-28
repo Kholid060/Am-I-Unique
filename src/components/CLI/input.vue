@@ -12,14 +12,14 @@
   </div>
 </template>
 <script>
-import Bus from "../bus/";
+import Bus from "../../utils/bus";
 export default {
   data: () => ({
     text: "",
     last: ""
   }),
   methods: {
-    previous(e) {
+    previousUserInput(e) {
       if (e.key === "ArrowUp") {
         this.last ? (this.text = this.last) : null;
       }
@@ -27,11 +27,11 @@ export default {
     pushHistory() {
       if (this.text !== "") {
         this.last = this.text;
-        let data = {
+        let InputData = {
           type: "command",
           text: this.text
         };
-        Bus.fire("data", data);
+        Bus.fire("userInput", InputData);
         this.text = "";
       }
     },
@@ -41,7 +41,7 @@ export default {
     }
   },
   created() {
-    window.addEventListener("keyup", this.previous);
+    window.addEventListener("keyup", this.previousUserInput);
   }
 };
 </script>

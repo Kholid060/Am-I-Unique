@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import CLI from "./views/cli.vue";
+import GUI from "./views/gui.vue";
 
 Vue.use(Router);
 
@@ -10,8 +11,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "CLI",
+      component: CLI
+    },
+    {
+      path: "/gui",
+      name: "GUI",
+      component: GUI
     }
   ]
 });

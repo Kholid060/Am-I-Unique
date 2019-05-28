@@ -7,16 +7,19 @@
       <span>👨‍💻 Fetching username availability in </span
       ><span class="green">{{ loading.name }}</span>
     </div>
+    <router-link to="/gui">
+      <el-button type="info" class="gui-button">GUI Mode</el-button>
+    </router-link>
     <TextInput></TextInput>
   </div>
 </template>
 <script>
-import History from "../components/history";
-import Header from "../components/header";
-import TextInput from "../components/input";
-import Spinner from "../components/spinner";
+import History from "../components/CLI/history";
+import Header from "../components/CLI/header";
+import TextInput from "../components/CLI/input";
+import Spinner from "../components/CLI/spinner";
 import cliSpinners from "cli-spinners";
-import Bus from "../bus/";
+import Bus from "../utils/bus";
 export default {
   components: { Header, TextInput, History, Spinner },
   data: () => ({
@@ -29,20 +32,30 @@ export default {
     }
   }),
   methods: {
-    pushData(e) {
-      let a = e.text.split(" ");
-      if (a[0] === "uname") {
-        if (a[1] === "--all" && a.length === 3) {
-          this.checkAllSite(a[2]);
-        } else if (a[1] === "--s" && a.length === 4) {
-          this.checkSpesificSite({ site: a[2], name: a[3] });
-        } else if (a[1] === "--help" && a.length === 2) {
+    pushData(userInputData) {
+      this.history.push(userInputData);
+      let splitInputData = userInputData.text.split(" ");
+      if (splitInputData[0] === "uname") {
+        if (splitInputData[1] === "--all" && splitInputData.length === 3) {
+          this.checkAllSite(splitInputData[2]);
+        } else if (splitInputData[1] === "--s" && splitInputData.length === 4) {
+          this.checkSpesificSite({
+            site: splitInputData[2],
+            name: splitInputData[3]
+          });
+        } else if (
+          splitInputData[1] === "--help" &&
+          splitInputData.length === 2
+        ) {
           this.history.push({
             type: "result",
             text:
               '<p><span class="green font-weight-medium"> uname --all [username] </span> Check username availability on all 100+ popular website</p><p><span class="green font-weight-medium"> uname --s (website) [username] </span> Check username availability on spesific website</p><p><span class="green font-weight-medium"> uname sites </span> get all supported website list</p>'
           });
-        } else if (a[1] === "sites" && a.length === 2) {
+        } else if (
+          splitInputData[1] === "sites" &&
+          splitInputData.length === 2
+        ) {
           let sites = this.sites.map(e => e.name);
           this.history.push({
             type: "result",
@@ -54,12 +67,12 @@ export default {
             text: "invalid command"
           });
         }
-      } else if (a[0] === "clear") {
+      } else if (splitInputData[0] === "clear") {
         this.history = [];
       } else {
         this.history.push({
           type: "error",
-          text: `'${a[0]}' is not recognized as a command`
+          text: `'${splitInputData[0]}' is not recognized as a command`
         });
       }
     },
@@ -70,9 +83,7 @@ export default {
         try {
           let response = await this.$http.get(`/${site.name}/${name}`);
           let data = response.data;
-          let text = data.available
-            ? `"${name}" on ${site.name} is available`
-            : `"${name}" on ${site.name} is already taken`;
+          let text = this.isAvailableText(data.available, name, site.name);
           this.history.push({
             type: "result",
             text: `<span class="${
@@ -84,11 +95,16 @@ export default {
         }
       }
     },
+    isAvailableText(isAvailable, name, website) {
+      return isAvailable
+        ? `✔️ "${name}" on ${website} is available`
+        : `❌ "${name}" on ${website} is already taken`;
+    },
     checkSpesificSite(data) {
-      let find = this.sites.find(
+      let isWebsiteSupported = this.sites.find(
         e => data.site.toLowerCase() == e.name.toLowerCase()
       );
-      if (find === undefined) {
+      if (isWebsiteSupported === undefined) {
         this.history.push({
           type: "error",
           text: `${data.site} is currently not supported`
@@ -98,9 +114,7 @@ export default {
         this.loading.name = data.site;
         this.$http.get(`/${data.site}/${data.name}`).then(response => {
           let res = response.data;
-          let text = res.available
-            ? `"${data.name}" on ${res.name} is available`
-            : `"${data.name}" on ${res.name} is already taken`;
+          let text = this.isAvailableText(res.available, data.name, data.site);
           this.history.push({
             type: "result",
             text: `<span class="${
@@ -116,13 +130,24 @@ export default {
     this.$http.get("/sites").then(response => (this.sites = response.data));
   },
   created() {
-    Bus.listen("data", this.pushData);
+    Bus.listen("userInput", this.pushData);
   }
 };
 </script>
 <style>
+.gui-button {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
 .home-container {
-  height: 100%;
-  padding: 20px;
+  font-family: "Roboto Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #c5c8c6;
+  height: calc(100vh - 10px);
+  padding: 0 20px;
+  padding-top: 10px;
+  overflow-y: auto;
 }
 </style>

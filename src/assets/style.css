@@ -4,14 +4,27 @@ html, body {
 	height: 100%;
 }
 body{
-	background-color: #1D1F21;
+	background-color: #eeeff4;
 }
 a {
 	color: #82a9ca;
 	text-decoration: none;
 }
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(30px);
+    opacity: 0
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 100
+  }
+}
 a:hover {
 	text-decoration: underline;
+}
+.fill-height{
+	height: 100%;
 }
 .font-weight-medium {
 	font-weight: 500;
