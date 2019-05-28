@@ -29,7 +29,7 @@ export default {
 }
 
 .gui-content {
-  animation: 0.6s ease 0s 1 slideInFromBottom;
+  animation: 0.7s ease 0s 1 slideInFromBottom;
   width: 100%;
   min-height: 400px;
 }

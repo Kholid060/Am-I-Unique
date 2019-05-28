@@ -28,6 +28,17 @@
         <el-input v-model="search" placeholder="Type to search website" />
       </template>
       <template slot-scope="scope">
+        <el-link
+          :href="!scope.row.available ? scope.row.link : null"
+          :disabled="!scope.row.available"
+          class="open-link"
+          target="_blank"
+          :underline="false"
+        >
+          <el-button type="primary" :disabled="scope.row.available" size="mini"
+            >Open</el-button
+          >
+        </el-link>
         <el-button type="danger" size="mini" @click="handleDelete(scope.$index)"
           >Delete</el-button
         >
@@ -57,6 +68,7 @@ export default {
           let data = response.data;
           this.tableData.push({
             website: data.name,
+            link: data.url,
             username: fireData.username,
             available: data.available
           });
@@ -83,6 +95,9 @@ export default {
 };
 </script>
 <style>
+.open-link {
+  margin-right: 6px;
+}
 .el-table {
   border-radius: 5px;
 }

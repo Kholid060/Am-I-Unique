@@ -20,6 +20,9 @@ a {
     opacity: 100
   }
 }
+.font-weight-medium{
+	font-weight: 600
+}
 a:hover {
 	text-decoration: underline;
 }

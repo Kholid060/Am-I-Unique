@@ -22,7 +22,7 @@ export default {
   width: 100%;
   position: absolute;
   z-index: -1;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 #app {
   height: 100%;

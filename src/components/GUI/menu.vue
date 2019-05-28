@@ -1,6 +1,9 @@
 <template>
   <el-row class="gui-menu">
-    <h1 class="gui-menu-title">Am I Unique</h1>
+    <div class="gui-menu-title">
+      <img src="../../assets/logo.png" width="40px" />
+      <h1>Am I Unique</h1>
+    </div>
     <a
       href="https://github.com/Kholid060/Am-I-Unique"
       target="_blank"
@@ -28,9 +31,19 @@
   padding: 10px 15px;
 }
 
+.gui-menu-title img {
+  vertical-align: sub;
+  margin-right: 10px;
+}
+
 .gui-menu-title {
   display: inline-block;
+}
+
+.gui-menu-title h1 {
+  display: inline-block;
   color: white;
+  margin: 0;
   font-size: 24px;
   font-weight: 600;
   cursor: default;
