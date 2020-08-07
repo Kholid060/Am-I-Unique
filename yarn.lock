@@ -8053,10 +8053,10 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-router@^3.0.3:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.6.tgz#2e4f0f9cbb0b96d0205ab2690cfe588935136ac3"
-  integrity sha512-Ox0ciFLswtSGRTHYhGvx2L44sVbTPNS+uD2kRISuo8B39Y79rOo0Kw0hzupTmiVtftQYCZl87mwldhh2L9Aquw==
+vue-router@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.1.tgz#e6275bfd1bfad3c0d82766377ba5f5f74f6da549"
+  integrity sha512-vmZSBb/A1+hddeSxPBlbLRnB5l+BkyrH89ojsy+d/OkQ3rb4jqbilaAQ3dfPWWbqPwSd11AX4l/DuBhOcR93dg==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
